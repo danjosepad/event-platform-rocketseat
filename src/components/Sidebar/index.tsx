@@ -1,5 +1,6 @@
 import { useQuery } from "@apollo/client"
 import { CircleNotch } from "phosphor-react"
+import { isPast } from 'date-fns'
 
 import { Lesson } from "../Lesson"
 import { GetLessonsQuery } from "./Sidebar.props"
@@ -27,8 +28,9 @@ export const Sidebar = () => {
               id={lesson.id} 
               title={lesson.title} 
               slug={lesson.slug} 
-              availableAt={lesson.availableAt} 
-              type={lesson.type} 
+              availableAt={new Date(lesson.availableAt)} 
+              type={lesson.type}
+              isLessonAvailable={isPast(new Date(lesson.availableAt))} 
             />
           ))}
           
